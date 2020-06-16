@@ -1,41 +1,55 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {Account} from '@swaply/core';
 
-function generateAcc() {
-	return Account.new();
-}
+const AccountDetailCard = (account) => {
+  const keypairJSON = account.keypair.json_pretty();
 
-function AccountDetailCard(privateKey, publicKey) {
   return (
-    <div className="acc-details">
+    <div className="acc-details" key={keypairJSON.public_key} data-simplebar>
       <p>
         Private Key:
-        <code>{privateKey}</code>
+        {' '}
+        <code>{keypairJSON.private_key}</code>
       </p>
       <p>
         Public Key:
-        <code>{publicKey}</code>
+        {' '}
+        <code>{keypairJSON.public_key}</code>
       </p>
     </div>
   );
-}
+};
 
-function App() {
-  const [accountDetails, setAccountDetails] = React.useState([]);
+const App = () => {
+  const [accounts, setAccountDetails] = React.useState([]);
+  const [wasm, setWasm] = React.useState(null);
+
+  const generateAcc = () => wasm.Account.new();
+
+  import('@swaply/core')
+    .then((loaded) => setWasm(loaded));
 
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="content flex">
+      <div className="header-section">
         <p>
-          Swaply Account Gen
+          Swaply Account Genenerator
         </p>
-      </header>
-      {accountDetails}
-      <button onClick=""
+        <button
+          onClick={
+              () => setAccountDetails(
+                (prevAccounts) => [...prevAccounts, AccountDetailCard(generateAcc())],
+              )
+            }
+          className="gen-button"
+          type="button"
+        >
+          Generate Account
+        </button>
+      </div>
+      {accounts}
     </div>
   );
-}
+};
 
 export default App;
