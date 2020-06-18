@@ -1,24 +1,20 @@
 import React from 'react';
 import './App.css';
 
-const AccountDetailCard = (account) => {
-  const keypairJSON = account.keypair.json_pretty();
-
-  return (
-    <div className="acc-details" key={keypairJSON.public_key} data-simplebar>
-      <p>
-        Private Key:
-        {' '}
-        <code>{keypairJSON.private_key}</code>
-      </p>
-      <p>
-        Public Key:
-        {' '}
-        <code>{keypairJSON.public_key}</code>
-      </p>
-    </div>
-  );
-};
+const AccountDetailCard = (account, i) => (
+  <div className="acc-details" key={i} data-simplebar>
+    <p>
+      Private Key:
+      {' '}
+      <code>{account.keypair.private_key_pretty()}</code>
+    </p>
+    <p>
+      Public Key:
+      {' '}
+      <code>{account.keypair.public_key_pretty()}</code>
+    </p>
+  </div>
+);
 
 const App = () => {
   const [accounts, setAccountDetails] = React.useState([]);
@@ -38,7 +34,9 @@ const App = () => {
         <button
           onClick={
               () => setAccountDetails(
-                (prevAccounts) => [...prevAccounts, AccountDetailCard(generateAcc())],
+                (prevAccounts) => [
+                  AccountDetailCard(generateAcc(), prevAccounts.size), ...prevAccounts,
+                ],
               )
             }
           className="gen-button"

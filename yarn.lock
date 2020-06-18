@@ -2039,6 +2039,11 @@
     "@svgr/plugin-svgo" "^4.3.1"
     loader-utils "^1.2.3"
 
+"@swaply/core@^0.3.7":
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/@swaply/core/-/core-0.3.7.tgz#4762afe11c04365e790451c9de85c1766d4f3df2"
+  integrity sha512-zNRgIfs7melh4Jk+pr9Xx4zsZTOxw+5kTdgyHjQkZ3XQWAvt3R53LwnHD1bIwewG2pFn2SSxLl5JEbdkq/c4KQ==
+
 "@testing-library/dom@^6.15.0":
   version "6.16.0"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-6.16.0.tgz#04ada27ed74ad4c0f0d984a1245bb29b1fd90ba9"
